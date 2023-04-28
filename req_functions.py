@@ -1,6 +1,20 @@
 from menu_functions import req_menu
+from file_functions import save_pwd
 from random import sample
-from save_functions import save_pwd
+
+# Password length
+def set_len():
+    try:
+        plen = 0
+        while plen <= 5:
+            plen = int(input("How long should the password be? "))
+            if plen <= 5:
+                print("We recommend setting a password greater than 5 characters long.")
+            else:
+                print(f"Okay, we'll create a password that is {plen} characters long.")
+                return plen
+    except ValueError:
+        print("Please enter a numeric character.")
 
 # Define lists for lowercase letters, uppercase letters, numbers and symbols
 list_low = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -26,6 +40,7 @@ def set_req(pwd_len):
             case "4":
                 req_list +=  list_sym
             case "5":
+                # No requirements selected
                 if req_list == []:
                     print("You haven't entered any requirements")
                     continue
@@ -42,17 +57,13 @@ def set_req(pwd_len):
                     for char in pwd_list:
                         user_pwd += char
                     print(user_pwd)
+                    print(type(user_pwd))
 
-                    # return user_pwd # this goes back to the main menu
+                    # Save password?
                     save_pwd(user_pwd)
+
+                    # Return to main menu
                     return
-                    # save_pwd = input("Do you want to save this password? Yes or No: ")
-                    # if save_pwd == "Yes" or save_pwd == "yes":
-                    #     print("Your password has been saved.")
-                    # elif save_pwd == "No" or save_pwd == "no":
-                    #     print("Your password was not saved.")
-                    # else:
-                    #     print("Your answer is invalid. Please enter 'Yes' or 'No'.")
             case "6":
                 continue
             case _:

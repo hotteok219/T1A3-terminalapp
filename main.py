@@ -1,8 +1,6 @@
 from menu_functions import main_menu
-from len_functions import set_len
-from req_functions import set_req
-from his_functions import check_file
-
+from req_functions import set_len, set_req
+from file_functions import check_file, view_file
 
 pwd_filename = "pwd_history.csv"
 
@@ -14,28 +12,24 @@ while user_action != "3":
     user_action = main_menu()
 
     match user_action:
-        # User selects: create a new password
+        # Create a new password
         case "1":
-            print("Great! We can create a new password")
+            print("Great! We can create a new password.")
 
-            # User input - password length
             pwd_len = set_len()
 
-            # User input - password requirements
             user_pwd = set_req(pwd_len)
 
-        # User selects: view a password
+        # View a password
         case "2":
-            # Does password file exist?
-            # Yes - password file exists.
             try:
                 check_file()
-            # No - password file does not exist, but do not create a file, re-prompt user for action.
+                view_file(pwd_filename)
             except FileNotFoundError:
                 print("You haven't saved any passwords yet.")
                 continue
         
-        # User selects: exit
+        # Exit
         case "3":
             print("Exiting the Password Generator. Goodbye!")
             continue
