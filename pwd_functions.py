@@ -33,7 +33,6 @@ list_sym = ["!", "@", "#", "$", "%", "^", "&", "*", "?"]
 def set_req():
     user_req = ""
     preq_list = []
-    
     while user_req != "6":
         user_req = req_menu()
         match user_req:
@@ -53,7 +52,7 @@ def set_req():
                 else:
                     # Remove any duplicates
                     preq_list = list(dict.fromkeys(preq_list))
-                    print(preq_list)
+                    print("Thanks for providing the requirements. Your password is being generated.")
                     return preq_list
             case "6":
                 continue
@@ -66,5 +65,5 @@ def gen_pwd(pwd_req, pwd_len):
     pwd_list = sample(pwd_req, pwd_len)
     for char in pwd_list:
         user_pwd += char
-    print(user_pwd)
+    print(f"Your password is: {user_pwd}")
     return user_pwd
