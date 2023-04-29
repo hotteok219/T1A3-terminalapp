@@ -1,4 +1,4 @@
-from menu_functions import req_menu
+from menu_functions import req_menu, exit_app
 from random import sample
 
 # Password length
@@ -19,8 +19,8 @@ def set_len():
         except Exception as e:
             print(f"Something unexpected has occurred. Error code: {e}.\nPlease try again with a numerical value over 5.")
             invalid_attempt += 1
-    print("Too many invalid attempts. Exiting the Password Generator. Goodbye!")
-    exit()
+    print("Too many invalid attempts.")
+    exit_app()
     
 
 # Define lists for lowercase letters, uppercase letters, numbers and symbols
@@ -55,7 +55,7 @@ def set_req():
                     print("Thanks for providing the requirements. Your password is being generated.")
                     return preq_list
             case "6":
-                continue
+                exit_app()
             case _:
                 print("You've entered an invalid option. Please enter 1, 2, 3, 4, 5 or 6.")
 

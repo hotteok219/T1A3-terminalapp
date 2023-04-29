@@ -1,4 +1,4 @@
-from menu_functions import main_menu
+from menu_functions import main_menu, exit_app
 from pwd_functions import set_len, set_req, gen_pwd
 from file_functions import check_file, view_file, save_pwd
 
@@ -31,8 +31,7 @@ while user_action != "3":
         
         # Exit
         case "3":
-            print("Exiting the Password Generator. Goodbye!")
-            continue
+            exit_app()
 
         # User entered an invalid input
         case _:
