@@ -1,5 +1,4 @@
 from menu_functions import req_menu
-from file_functions import save_pwd
 from random import sample
 
 # Password length
@@ -31,45 +30,41 @@ list_num = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 list_sym = ["!", "@", "#", "$", "%", "^", "&", "*", "?"]
 
 # Set requirements
-def set_req(pwd_len):
+def set_req():
     user_req = ""
-    req_list = []
-    user_pwd = ""
-
+    preq_list = []
+    
     while user_req != "6":
         user_req = req_menu()
         match user_req:
             case "1":
-                req_list += list_low
+                preq_list += list_low
             case "2":
-                req_list += list_upp
+                preq_list += list_upp
             case "3":
-                req_list += list_num
+                preq_list += list_num
             case "4":
-                req_list +=  list_sym
+                preq_list +=  list_sym
             case "5":
                 # No requirements selected
-                if req_list == []:
+                if preq_list == []:
                     print("You haven't entered any requirements")
                     continue
                 else:
                     # Remove any duplicates
-                    req_list = list(dict.fromkeys(req_list))
-                    print(req_list)
-                    
-                    # Generate password
-                    pwd_list = sample(req_list, int(pwd_len))
-                    for char in pwd_list:
-                        user_pwd += char
-                    print(user_pwd)
-
-                    # Save password?
-                    save_pwd(user_pwd)
-
-                    # Return to main menu
-                    return
+                    preq_list = list(dict.fromkeys(preq_list))
+                    print(preq_list)
+                    return preq_list
             case "6":
                 continue
             case _:
                 print("You've entered an invalid option. Please enter 1, 2, 3, 4, 5 or 6.")
-            
+
+# Generate password
+def gen_pwd(pwd_req, pwd_len):
+    user_pwd = ""
+    pwd_list = sample(pwd_req, pwd_len)
+    for char in pwd_list:
+        user_pwd += char
+    print(user_pwd)
+    return user_pwd

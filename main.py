@@ -1,6 +1,6 @@
 from menu_functions import main_menu
-from req_functions import set_len, set_req
-from file_functions import check_file, view_file
+from pwd_functions import set_len, set_req, gen_pwd
+from file_functions import check_file, view_file, save_pwd
 
 pwd_filename = "pwd_history.csv"
 
@@ -16,7 +16,9 @@ while user_action != "3":
         case "1":
             print("Great! We can create a new password.")
             pwd_len = set_len()
-            user_pwd = set_req(pwd_len)
+            pwd_req = set_req()
+            user_pwd = gen_pwd(pwd_req, pwd_len)
+            save_pwd(user_pwd)
 
         # View a password
         case "2":
