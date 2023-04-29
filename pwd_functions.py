@@ -1,5 +1,7 @@
-from menu_functions import req_menu, exit_app
 from random import sample
+from colored import fg, bg, attr
+from menu_functions import req_menu, exit_app
+
 
 # Password length
 def set_len():
@@ -7,19 +9,19 @@ def set_len():
     invalid_attempt = 0
     for invalid_attempt in range(5):
         try:
-            plen = int(input("How long should the password be? "))
+            plen = int(input(f"{bg(0)}{fg(221)}How long should the password be?{attr(0)} "))
             if plen <= 5:
-                print("Your password length is too short. Passwords should be at least 6 characters long.")
+                print(f"{bg(0)}{fg(196)}Your password length is too short. Passwords should be at least 6 characters long.{attr(0)}")
             else:
-                print(f"Okay, we'll create a password that is {plen} characters long.")
+                print(f"{bg(0)}{fg(221)}Okay, we'll create a password that is {plen} characters long.{attr(0)}")
                 return plen
         except ValueError:
-            print("Please enter a numerical value.\nNote: Passwords should be at least 6 characters long.")
+            print(f"{bg(0)}{fg(196)}Please enter a numerical value.\nNote: Passwords should be at least 6 characters long.{attr(0)}")
             invalid_attempt += 1
         except Exception as e:
-            print(f"Something unexpected has occurred. Error code: {e}.\nPlease try again with a numerical value over 5.")
+            print(f"{bg(0)}{fg(196)}Something unexpected has occurred. Error code: {e}.\nPlease try again with a numerical value over 5.{attr(0)}")
             invalid_attempt += 1
-    print("Too many invalid attempts.")
+    print(f"{bg(0)}{fg(196)}Too many invalid attempts.{attr(0)}")
     exit_app()
     
 
@@ -61,10 +63,6 @@ def set_req():
 
 # Generate password
 def gen_pwd(pwd_req, pwd_len):
-    # user_pwd = ""
-    # pwd_list = sample(pwd_req, pwd_len)
-    # for char in pwd_list:
-    #     user_pwd += char
     user_pwd = "".join(sample(pwd_req, pwd_len))
     print(f"Your password is: {user_pwd}")
     return user_pwd

@@ -1,4 +1,5 @@
 import csv
+from colored import fg, bg, attr
 
 pwd_filename = "pwd_history.csv"
 
@@ -13,12 +14,12 @@ def create_file():
     pwd_file = open(pwd_filename, "w")
     pwd_file.write("My saved passwords\n")
     pwd_file.close()
-    print("A file to store your password history has been created.")
+    print(f"{bg(0)}{fg(220)}A file to store your password history has been created.{attr(0)}")
 
 
 # View password history
 def view_file(pwd_filename):
-    print("Great! Please see your passwords below:")
+    print(f"{bg(0)}{fg(220)}Great! {fg(221)}Please see your passwords below:({attr(0)}")
     with open(pwd_filename, "r") as pwd_file:
         reader = csv.reader(pwd_file)
         for row in reader:
@@ -29,22 +30,22 @@ def view_file(pwd_filename):
 def save_pwd(user_pwd):
     save_pwd = ""
     while True:
-        save_pwd = input("Do you want to save this password? Yes or No: ")
+        save_pwd = input(f"{bg(0)}{fg(221)}Do you want to save this password? Yes or No: {attr(0)}")
         if save_pwd == "Yes" or save_pwd == "yes":
             try:
                 check_file()
                 add_pwd(str(user_pwd))
-                print(f"I have saved your password - {user_pwd}.")
+                print(f"{bg(0)}{fg(220)}I have saved your password - {user_pwd}.{attr(0)}")
                 break
             except FileNotFoundError:
                 create_file()
                 add_pwd(user_pwd)
                 break
         elif save_pwd == "No" or save_pwd == "no":
-            print("I have not saved your password.")
+            print(f"{bg(0)}{fg(220)}I have not saved your password.{attr(0)}")
             break
         else:
-            print("Sorry, I didn't quite get that. Do you want to save this password? Please enter 'Yes' or 'No'.")
+            print(f"{bg(0)}{fg(196)}Sorry, I didn't quite get that. {fg(221)}Do you want to save this password? Please enter 'Yes' or 'No'.{attr(0)}")
             continue
 
 
