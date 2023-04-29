@@ -49,20 +49,20 @@ def set_req():
             case "5":
                 # No requirements selected
                 if preq_list == []:
-                    print("You haven't entered any requirements")
+                    print(f"{bg(0)}{fg(196)}You haven't entered any requirements.{attr(0)}")
                     continue
                 else:
                     # Remove any duplicates
                     preq_list = list(dict.fromkeys(preq_list))
-                    print("Thanks for providing the requirements. Your password is being generated.")
+                    print(f"{bg(0)}{fg(220)}Thanks for providing the requirements. Your password is being generated.{attr(0)}")
                     return preq_list
             case "6":
                 exit_app()
             case _:
-                print("You've entered an invalid option. Please enter 1, 2, 3, 4, 5 or 6.")
+                print(f"{bg(0)}{fg(196)}You've entered an invalid option.{attr(0)}{bg(0)} Please enter {fg(2)}1{attr(0)}{bg(0)}, {fg(6)}2{attr(0)}{bg(0)}, {fg(13)}3{attr(0)}{bg(0)}, {fg(129)}4{attr(0)}{bg(0)}, {fg(166)}5{attr(0)}{bg(0)} or {fg(199)}6{attr(0)}{bg(0)}.{attr(0)}")
 
 # Generate password
 def gen_pwd(pwd_req, pwd_len):
     user_pwd = "".join(sample(pwd_req, pwd_len))
-    print(f"Your password is: {user_pwd}")
+    print(f"{bg(0)}{fg(220)}Your password is: {fg(39)}{user_pwd}{attr(0)}")
     return user_pwd

@@ -35,7 +35,7 @@ def save_pwd(user_pwd):
             try:
                 check_file()
                 add_pwd(str(user_pwd))
-                print(f"{bg(0)}{fg(220)}I have saved your password - {user_pwd}.{attr(0)}")
+                print(f"{bg(0)}{fg(220)}I have saved your password - {fg(39)}{user_pwd}{fg(220)}.{attr(0)}")
                 break
             except FileNotFoundError:
                 create_file()
