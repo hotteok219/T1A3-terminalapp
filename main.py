@@ -15,9 +15,7 @@ while user_action != "3":
         # Create a new password
         case "1":
             print("Great! We can create a new password.")
-
             pwd_len = set_len()
-
             user_pwd = set_req(pwd_len)
 
         # View a password

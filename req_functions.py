@@ -4,17 +4,25 @@ from random import sample
 
 # Password length
 def set_len():
-    try:
-        plen = 0
-        while plen <= 5:
+    plen = 0
+    invalid_attempt = 0
+    for invalid_attempt in range(5):
+        try:
             plen = int(input("How long should the password be? "))
             if plen <= 5:
-                print("We recommend setting a password greater than 5 characters long.")
+                print("Your password length is too short. Passwords should be at least 6 characters long.")
             else:
                 print(f"Okay, we'll create a password that is {plen} characters long.")
                 return plen
-    except ValueError:
-        print("Please enter a numeric character.")
+        except ValueError:
+            print("Please enter a numerical value.\nNote: Passwords should be at least 6 characters long.")
+            invalid_attempt += 1
+        except Exception as e:
+            print(f"Something unexpected has occurred. Error code: {e}.\nPlease try again with a numerical value over 5.")
+            invalid_attempt += 1
+    print("Too many invalid attempts. Exiting the Password Generator. Goodbye!")
+    exit()
+    
 
 # Define lists for lowercase letters, uppercase letters, numbers and symbols
 list_low = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -45,19 +53,15 @@ def set_req(pwd_len):
                     print("You haven't entered any requirements")
                     continue
                 else:
-                    print(req_list)
-                    
-                    # Remove duplicates
+                    # Remove any duplicates
                     req_list = list(dict.fromkeys(req_list))
                     print(req_list)
                     
                     # Generate password
                     pwd_list = sample(req_list, int(pwd_len))
-                    print(pwd_list)
                     for char in pwd_list:
                         user_pwd += char
                     print(user_pwd)
-                    print(type(user_pwd))
 
                     # Save password?
                     save_pwd(user_pwd)
