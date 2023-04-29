@@ -61,9 +61,10 @@ def set_req():
 
 # Generate password
 def gen_pwd(pwd_req, pwd_len):
-    user_pwd = ""
-    pwd_list = sample(pwd_req, pwd_len)
-    for char in pwd_list:
-        user_pwd += char
+    # user_pwd = ""
+    # pwd_list = sample(pwd_req, pwd_len)
+    # for char in pwd_list:
+    #     user_pwd += char
+    user_pwd = "".join(sample(pwd_req, pwd_len))
     print(f"Your password is: {user_pwd}")
     return user_pwd
