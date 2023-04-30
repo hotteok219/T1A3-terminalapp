@@ -40,12 +40,16 @@ def set_req():
         match user_req:
             case "1":
                 preq_list += list_low
+                print(f"{bg(0)}{fg(220)}You've added lowercase letters to the list of requirements.{attr(0)}")
             case "2":
                 preq_list += list_upp
+                print(f"{bg(0)}{fg(220)}You've added uppercase letters to the list of requirements.{attr(0)}")
             case "3":
                 preq_list += list_num
+                print(f"{bg(0)}{fg(220)}You've added numbers to the list of requirements.{attr(0)}")
             case "4":
                 preq_list +=  list_sym
+                print(f"{bg(0)}{fg(220)}You've added special characters to the list of requirements.{attr(0)}")
             case "5":
                 # No requirements selected
                 if preq_list == []:

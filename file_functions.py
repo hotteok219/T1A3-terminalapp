@@ -45,7 +45,7 @@ def save_pwd(user_pwd):
             print(f"{bg(0)}{fg(220)}I have not saved your password.{attr(0)}")
             break
         else:
-            print(f"{bg(0)}{fg(196)}Sorry, I didn't quite get that. {fg(221)}Do you want to save this password? Please enter 'Yes' or 'No'.{attr(0)}")
+            print(f"{bg(0)}{fg(196)}Sorry, I didn't quite get that. {fg(221)}Please enter 'Yes' or 'No'.{attr(0)}")
             continue
 
 
