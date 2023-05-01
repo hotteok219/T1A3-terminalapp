@@ -18,7 +18,7 @@ def create_file():
 
 
 # View password history
-def view_file(pwd_filename):
+def view_file():
     print(f"{bg(0)}{fg(220)}Great! {fg(221)}Please see your passwords below:({attr(0)}")
     with open(pwd_filename, "r") as pwd_file:
         reader = csv.reader(pwd_file)
