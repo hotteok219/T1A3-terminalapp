@@ -12,7 +12,7 @@ while user_action != "3":
 
     match user_action:
         # Create a new password
-        case "1":
+        case 1:
             print(f"{bg(0)}{fg(220)}Great! We can create a new password.{attr(0)}")
             pwd_len = set_len()
             pwd_req = set_req()
@@ -20,7 +20,7 @@ while user_action != "3":
             save_pwd(user_pwd)
 
         # View a password
-        case "2":
+        case 2:
             try:
                 check_file()
                 view_file()
@@ -30,9 +30,9 @@ while user_action != "3":
                 continue
         
         # Exit
-        case "3":
+        case 3:
             exit_app()
 
         # User entered an invalid input
         case _:
-            print(f"{bg(0)}{fg(196)}You've entered an invalid option. Please enter 1, 2 or 3.{attr(0)}")
+            print(f"{bg(0)}{fg(196)}Something went wrong. Please enter 1, 2 or 3.{attr(0)}")

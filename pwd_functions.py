@@ -15,12 +15,12 @@ def set_len():
             else:
                 print(f"{bg(0)}{fg(221)}Okay, we'll create a password that is {plen} characters long.{attr(0)}")
                 return plen
-        except ValueError:
+        except ValueError as e:
             print(f"{bg(0)}{fg(196)}Please enter a numerical value.\nNote: Passwords should be at least 6 characters long.{attr(0)}")
-            invalid_attempt += 1
+            # invalid_attempt += 1
         except Exception as e:
             print(f"{bg(0)}{fg(196)}Something unexpected has occurred. Error code: {e}.\nPlease try again with a numerical value over 5.{attr(0)}")
-            invalid_attempt += 1
+            # invalid_attempt += 1
     print(f"{bg(0)}{fg(196)}Too many invalid attempts.{attr(0)}")
     exit_app()
     

@@ -2,12 +2,17 @@ from colored import fg, bg, attr
 
 # Main menu
 def main_menu():
-    print(f"*************\n  Main menu\n*************")
-    print(f"{fg(2)}{bg(0)}1.{attr(0)} I want to create a new password.")
-    print(f"{fg(6)}{bg(0)}2.{attr(0)} I want to view my passwords.")
-    print(f"{fg(13)}{bg(0)}3.{attr(0)} I want to exit.")
-    inp = input(f"Please enter {fg(2)}{bg(0)}1{attr(0)}, {fg(6)}{bg(0)}2{attr(0)} or {fg(13)}{bg(0)}3{attr(0)}: ")
-    return inp
+    invalid_attempt = 0
+    while True:
+        try:
+            print(f"*************\n  Main menu\n*************")
+            print(f"{fg(2)}{bg(0)}1.{attr(0)} I want to create a new password.")
+            print(f"{fg(6)}{bg(0)}2.{attr(0)} I want to view my passwords.")
+            print(f"{fg(13)}{bg(0)}3.{attr(0)} I want to exit.")
+            inp = int(input(f"Please enter {fg(2)}{bg(0)}1{attr(0)}, {fg(6)}{bg(0)}2{attr(0)} or {fg(13)}{bg(0)}3{attr(0)}: "))
+            return inp
+        except ValueError:
+            print(f"{bg(0)}{fg(196)}You've entered an invalid option. Please enter 1, 2 or 3.{attr(0)}")
 
 # Password requirements menu
 def req_menu():
