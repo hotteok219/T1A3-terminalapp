@@ -1,45 +1,43 @@
 import csv
 from colored import fg, bg, attr
 
-pwd_filename = "pwd_history.csv"
-
 # Check if password history exists
-def check_file():
-    pwd_file = open(pwd_filename, "r")
+def check_file(pfilename):
+    pwd_file = open(pfilename, "r")
     pwd_file.close()
 
 
 # Create a file for password history
-def create_file():
-    pwd_file = open(pwd_filename, "w")
+def create_file(pfilename):
+    pwd_file = open(pfilename, "w")
     pwd_file.write("My saved passwords\n")
     pwd_file.close()
     print(f"{bg(0)}{fg(220)}A file to store your password history has been created.{attr(0)}")
 
 
 # View password history
-def view_file():
+def view_file(pfilename):
     print(f"{bg(0)}{fg(220)}Great! {fg(221)}Please see your passwords below:({attr(0)}")
-    with open(pwd_filename, "r") as pwd_file:
+    with open(pfilename, "r") as pwd_file:
         reader = csv.reader(pwd_file)
         for row in reader:
             print(row[0])
 
 
 # Ask user if they want to save the password
-def save_pwd(user_pwd):
+def save_pwd(user_pwd, pfilename):
     save_pwd = ""
     while True:
         save_pwd = input(f"{bg(0)}{fg(221)}Do you want to save this password? Yes or No: {attr(0)}")
         if save_pwd == "Yes" or save_pwd == "yes":
             try:
-                check_file()
-                add_pwd(str(user_pwd))
+                check_file(pfilename)
+                add_pwd(user_pwd, pfilename)
                 print(f"{bg(0)}{fg(220)}I have saved your password - {fg(39)}{user_pwd}{fg(220)}.{attr(0)}")
                 break
             except FileNotFoundError:
-                create_file()
-                add_pwd(user_pwd)
+                create_file(pfilename)
+                add_pwd(user_pwd, pfilename)
                 break
         elif save_pwd == "No" or save_pwd == "no":
             print(f"{bg(0)}{fg(220)}I have not saved your password.{attr(0)}")
@@ -50,7 +48,7 @@ def save_pwd(user_pwd):
 
 
 # Add password to password history
-def add_pwd(user_pwd):
-    with open(pwd_filename, "a") as pwd_file:
+def add_pwd(user_pwd, pfilename):
+    with open(pfilename, "a") as pwd_file:
         writer = csv.writer(pwd_file)
         writer.writerow([user_pwd])

@@ -5,6 +5,7 @@ from file_functions import check_file, view_file, save_pwd
 
 print(f"{bg(0)}{fg(220)}Hello! Welcome to the Password Generator. {fg(221)}How can I help?{attr(0)}")
 
+pwd_filename = "pwd_history.csv"
 user_action = ""
 
 while user_action != "3":
@@ -17,14 +18,14 @@ while user_action != "3":
             pwd_len = set_len()
             pwd_req = set_req()
             user_pwd = gen_pwd(pwd_req, pwd_len)
-            save_pwd(user_pwd)
+            save_pwd(user_pwd, pwd_filename)
 
         # View a password
         case 2:
             try:
-                check_file()
-                view_file()
-                input(f"{bg(0)}{fg(221)}Press enter to go back to the main menu:{attr(0)} ")
+                check_file(pwd_filename)
+                view_file(pwd_filename)
+                input(f"{bg(0)}{fg(221)}Press enter to go back to the main menu.{attr(0)} ")
             except FileNotFoundError:
                 print(f"{bg(0)}{fg(196)}You haven't saved any passwords yet.{attr(0)}")
                 continue

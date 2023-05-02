@@ -2,6 +2,7 @@ from random import sample
 from string import ascii_lowercase, ascii_uppercase, digits, punctuation
 from colored import fg, bg, attr
 from menu_functions import req_menu, exit_app
+from err_functions import err_req, err_plen
 
 
 # Password length
@@ -12,16 +13,18 @@ def set_len():
         try:
             plen = int(input(f"{bg(0)}{fg(221)}How long should the password be?{attr(0)} "))
             if plen <= 5:
-                print(f"{bg(0)}{fg(196)}Your password length is too short. Passwords should be at least 6 characters long.{attr(0)}")
+                err_plen("Your password length is too short.")
             else:
                 print(f"{bg(0)}{fg(221)}Okay, we'll create a password that is {plen} characters long.{attr(0)}")
                 return plen
         except ValueError as e:
-            print(f"{bg(0)}{fg(196)}Please enter a numerical value.\nNote: Passwords should be at least 6 characters long.{attr(0)}")
+            err_plen(f"{type(e).__name__}: Please enter a numerical value.")
             invalid_attempt += 1
+            print(f"{bg(0)}{fg(196)}{5-invalid_attempt} invalid attempts remaining.{attr(0)}")
         except Exception as e:
-            print(f"{bg(0)}{fg(196)}Something unexpected has occurred. Error code: {e}.\nPlease try again with a numerical value over 5.{attr(0)}")
+            err_plen(f"{type(e).__name__}: Something unexpected has occurred.")
             invalid_attempt += 1
+            print(f"{bg(0)}{fg(196)}{5-invalid_attempt} invalid attempts remaining.{attr(0)}")
     print(f"{bg(0)}{fg(196)}Too many invalid attempts.{attr(0)}")
     exit_app()
     
@@ -39,32 +42,32 @@ def set_req():
     while user_req != "6":
         user_req = req_menu()
         match user_req:
-            case "1":
+            case 1:
                 preq_list += list_low
                 print(f"{bg(0)}{fg(220)}You've added lowercase letters to the list of requirements.{attr(0)}")
-            case "2":
+            case 2:
                 preq_list += list_upp
                 print(f"{bg(0)}{fg(220)}You've added uppercase letters to the list of requirements.{attr(0)}")
-            case "3":
+            case 3:
                 preq_list += list_num
                 print(f"{bg(0)}{fg(220)}You've added numbers to the list of requirements.{attr(0)}")
-            case "4":
+            case 4:
                 preq_list +=  list_sym
                 print(f"{bg(0)}{fg(220)}You've added special characters to the list of requirements.{attr(0)}")
-            case "5":
+            case 5:
                 # No requirements selected
                 if preq_list == []:
-                    print(f"{bg(0)}{fg(196)}You haven't entered any requirements.{attr(0)}")
+                    print(f"{bg(0)}{fg(196)}You haven't entered any requirements. Please enter at least one requirement.{attr(0)}")
                     continue
                 else:
                     # Remove any duplicates
                     preq_list = list(dict.fromkeys(preq_list))
                     print(f"{bg(0)}{fg(220)}Thanks for providing the requirements. Your password is being generated.{attr(0)}")
                     return preq_list
-            case "6":
+            case 6:
                 exit_app()
             case _:
-                print(f"{bg(0)}{fg(196)}You've entered an invalid option.{attr(0)}{bg(0)} Please enter {fg(2)}1{attr(0)}{bg(0)}, {fg(6)}2{attr(0)}{bg(0)}, {fg(13)}3{attr(0)}{bg(0)}, {fg(129)}4{attr(0)}{bg(0)}, {fg(166)}5{attr(0)}{bg(0)} or {fg(199)}6{attr(0)}{bg(0)}.{attr(0)}")
+                err_req(f"{type(e).__name__}: Something went wrong.")
 
 # Generate password
 def gen_pwd(pwd_req, pwd_len):
