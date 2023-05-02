@@ -4,27 +4,21 @@ from pwd_functions import set_len
 from menu_functions import main_menu
 from file_functions import add_pwd
 
+# Tests the set_len() function, where user input is 6, expectation: set_len returns 6.
 def test_set_len_valid(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: 6)
     assert set_len() == 6
-    
-def test_set_len_invalid1(monkeypatch):
+
+# Tests the set_len() function, where user input is a string "abc", expectation: ValueError and SystemExit (after looping is complete)
+def test_set_len_invalid(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: "abc")
     with pytest.raises(SystemExit):
         with pytest.raises(ValueError):
             set_len()
     
-# def test_set_len_invalid2(monkeypatch):
-#     monkeypatch.setattr('builtins.input', lambda _: "def")
-#     with pytest.raises(ValueError):
-#         with pytest.raises(SystemExit):
-#             set_len()
-
-    
 def test_main_menu_valid(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: 1)
     assert main_menu() == 1
-
 
 def test_main_menu_invalid(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: "abc")

@@ -1,4 +1,5 @@
 from random import sample
+from string import ascii_lowercase, ascii_uppercase, digits, punctuation
 from colored import fg, bg, attr
 from menu_functions import req_menu, exit_app
 
@@ -17,19 +18,19 @@ def set_len():
                 return plen
         except ValueError as e:
             print(f"{bg(0)}{fg(196)}Please enter a numerical value.\nNote: Passwords should be at least 6 characters long.{attr(0)}")
-            # invalid_attempt += 1
+            invalid_attempt += 1
         except Exception as e:
             print(f"{bg(0)}{fg(196)}Something unexpected has occurred. Error code: {e}.\nPlease try again with a numerical value over 5.{attr(0)}")
-            # invalid_attempt += 1
+            invalid_attempt += 1
     print(f"{bg(0)}{fg(196)}Too many invalid attempts.{attr(0)}")
     exit_app()
     
 
-# Define lists for lowercase letters, uppercase letters, numbers and symbols
-list_low = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-list_upp = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-list_num = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
-list_sym = ["!", "@", "#", "$", "%", "^", "&", "*", "?"]
+# Define lists for lowercase letters, uppercase letters, numbers and special characters
+list_low = ascii_lowercase
+list_upp = ascii_uppercase
+list_num = digits
+list_sym = punctuation
 
 # Set requirements
 def set_req():
