@@ -67,7 +67,7 @@ def set_req():
             case 6:
                 exit_app()
             case _:
-                err_req(f"{type(e).__name__}: Something went wrong.")
+                err_req(f"Something went wrong.")
 
 # Generate password
 def gen_pwd(pwd_req, pwd_len):
