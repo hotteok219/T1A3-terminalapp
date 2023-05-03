@@ -1,2 +1,3 @@
 /pwd_history.csv
-/user_test.md
+/pytest_cache
+/__pycache__

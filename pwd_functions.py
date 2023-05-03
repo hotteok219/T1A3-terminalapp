@@ -21,6 +21,8 @@ def set_len():
             err_plen(f"{type(e).__name__}: Please enter a numerical value.")
             invalid_attempt += 1
             print(f"{bg(0)}{fg(196)}{5-invalid_attempt} invalid attempts remaining.{attr(0)}")
+        except KeyboardInterrupt:
+            exit_app()
         except Exception as e:
             err_plen(f"{type(e).__name__}: Something unexpected has occurred.")
             invalid_attempt += 1

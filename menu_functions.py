@@ -14,6 +14,8 @@ def main_menu():
             return inp
         except ValueError as e:
             err_main(f"{type(e).__name__}: You've entered an invalid option.")
+        except KeyboardInterrupt:
+            exit_app()
         except Exception as e:
             err_main(f"{type(e).__name__}: Something went wrong.")
 
@@ -33,6 +35,8 @@ def req_menu():
             return req
         except ValueError as e:
             err_req(f"{type(e).__name__}: You've entered an invalid option.")
+        except KeyboardInterrupt:
+            exit_app()
         except Exception as e:
             err_req(f"{type(e).__name__}: Something went wrong.")
 

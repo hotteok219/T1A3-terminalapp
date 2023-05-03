@@ -2,6 +2,7 @@ from colored import fg, bg, attr
 from menu_functions import main_menu, exit_app
 from pwd_functions import set_len, set_req, gen_pwd
 from file_functions import check_file, view_file, save_pwd
+from err_functions import err_main
 
 print(f"{bg(0)}{fg(220)}Hello! Welcome to the Password Generator. {fg(221)}How can I help?{attr(0)}")
 
@@ -36,4 +37,4 @@ while user_action != "3":
 
         # User entered an invalid input
         case _:
-            print(f"{bg(0)}{fg(196)}Something went wrong. Please enter 1, 2 or 3.{attr(0)}")
+            err_main("Something went wrong.")
