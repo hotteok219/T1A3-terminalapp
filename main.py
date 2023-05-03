@@ -30,6 +30,10 @@ while user_action != "3":
             except FileNotFoundError:
                 print(f"{bg(0)}{fg(196)}You haven't saved any passwords yet.{attr(0)}")
                 continue
+            except KeyboardInterrupt:
+                exit_app()
+            except Exception as e:
+                err_main(f"{type(e).__name__}: Something went wrong.")
         
         # Exit
         case 3:

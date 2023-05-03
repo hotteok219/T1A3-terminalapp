@@ -1,4 +1,4 @@
-/pwd_history.csv
 .pytest_cache/
 __pycache__/
 pwdgen-venv/
+/pwd_history.csv

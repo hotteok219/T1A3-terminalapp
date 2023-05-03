@@ -1,5 +1,6 @@
 import csv
 from colored import fg, bg, attr
+from menu_functions import exit_app
 
 # Check if password history exists
 def check_file(pfile):
@@ -17,12 +18,11 @@ def create_file(pfile):
 
 # View password history
 def view_file(pfile):
-    print(f"{bg(0)}{fg(220)}Great! {fg(221)}Please see your passwords below:({attr(0)}")
+    print(f"{bg(0)}{fg(220)}Great! {fg(221)}Please see your passwords below:{attr(0)}")
     with open(pfile, "r") as pwd_file:
         reader = csv.reader(pwd_file)
         for row in reader:
             print(row[0])
-
 
 # Ask user if they want to save the password
 def save_pwd(user_pwd, pfile):

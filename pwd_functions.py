@@ -13,23 +13,19 @@ def set_len():
         try:
             plen = int(input(f"{bg(0)}{fg(221)}How long should the password be?{attr(0)} "))
             if plen <= 5:
-                err_plen("Your password length is too short.")
+                err_plen("Your password length is too short.", invalid_attempt)
             else:
                 print(f"{bg(0)}{fg(221)}Okay, we'll create a password that is {plen} characters long.{attr(0)}")
                 return plen
         except ValueError as e:
-            err_plen(f"{type(e).__name__}: Please enter a numerical value.")
-            invalid_attempt += 1
-            print(f"{bg(0)}{fg(196)}{5-invalid_attempt} invalid attempts remaining.{attr(0)}")
+            err_plen(f"{type(e).__name__}: Please enter a numerical value.", invalid_attempt)
         except KeyboardInterrupt:
             exit_app()
         except Exception as e:
-            err_plen(f"{type(e).__name__}: Something unexpected has occurred.")
-            invalid_attempt += 1
-            print(f"{bg(0)}{fg(196)}{5-invalid_attempt} invalid attempts remaining.{attr(0)}")
+            err_plen(f"{type(e).__name__}: Something unexpected has occurred.", invalid_attempt)
     print(f"{bg(0)}{fg(196)}Too many invalid attempts.{attr(0)}")
     exit_app()
-    
+
 
 # Define lists for lowercase letters, uppercase letters, numbers and special characters
 list_low = ascii_lowercase
