@@ -72,15 +72,30 @@ def add_pwd(pwd_id, user_pwd, pfile):
 
 # Remove password from password history
 def del_pwd(pfile):
+    pwd_exists = False
     del_pwdid = input(f"{bg(0)}{fg(221)}Enter the label of the password you want to delete: {attr(0)}")
     del_pwdlist = []
+
+    # check if password exists
     with open(pfile, "r") as pwd_file:
         reader = csv.reader(pwd_file)
         for row in reader:
-            if del_pwdid != row[0]:
-                del_pwdlist.append(row)
+            if del_pwdid == row[0]:
+                pwd_exists = True
             else:
-                print(f"{bg(0)}{fg(220)}Your password for {fg(39)}{del_pwdid}{attr(0)} will be deleted.{attr(0)}")
+                pwd_exists = False
+    
+    if pwd_exists:
+        with open(pfile, "r") as pwd_file:
+            reader = csv.reader(pwd_file)
+            for row in reader:
+                if del_pwdid != row[0]:
+                    del_pwdlist.append(row)
+                else:
+                    print(f"{bg(0)}{fg(220)}Your password for {fg(39)}{del_pwdid}{attr(0)}{bg(0)}{fg(220)} will be deleted.{attr(0)}")
         with open(pfile, "w") as pwd_file:
             writer = csv.writer(pwd_file)
             writer.writerows(del_pwdlist)
+    else:
+        print(f"{bg(0)}{fg(196)}The password for {fg(39)}{del_pwdid}{attr(0)}{bg(0)}{fg(196)} doesn't exist.{attr(0)}")
+        return
