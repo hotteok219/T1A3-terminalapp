@@ -49,7 +49,7 @@ while user_action != "3":
                 err_main(f"{type(e).__name__}: Something went wrong.")
 
         # Exit
-        case 4:
+        case 5:
             exit_app()
 
         # User entered an invalid input

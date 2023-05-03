@@ -72,7 +72,6 @@ def add_pwd(pwd_id, user_pwd, pfile):
 
 # Remove password from password history
 def del_pwd(pfile):
-    pwd_exists = False
     del_pwdid = input(f"{bg(0)}{fg(221)}Enter the label of the password you want to delete: {attr(0)}")
     del_pwdlist = []
 
