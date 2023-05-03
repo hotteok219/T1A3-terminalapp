@@ -1,5 +1,5 @@
 from colored import fg, bg, attr
-from err_functions import err_main, err_req, err_plen
+from err_functions import err_main, err_req
 
 # Main menu
 def main_menu():
