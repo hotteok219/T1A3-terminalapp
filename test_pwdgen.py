@@ -24,7 +24,7 @@ def test_add_pwd_valid(monkeypatch):
         reader = csv.reader(test_pwd_file)
         original_length = sum(1 for row in reader)
     monkeypatch.setattr('builtins.input', lambda _: "Password1")
-    add_pwd("Password1", "Test1", test_pwd_filename)
+    add_pwd("Test1", "Password1", test_pwd_filename)
     with open(test_pwd_filename) as test_pwd_file:
         reader = csv.reader(test_pwd_file)
         new_length = sum(1 for row in reader)

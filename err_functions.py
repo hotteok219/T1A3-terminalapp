@@ -2,7 +2,7 @@ from colored import fg, bg, attr
 
 # Error for Main Menu
 def err_main(err_msg):
-    print(f"{bg(0)}{fg(196)}{err_msg} Please enter 1, 2 or 3.{attr(0)}")
+    print(f"{bg(0)}{fg(196)}{err_msg} Please enter 1, 2, 3 or 4.{attr(0)}")
 
 # Error for Requirements menu
 def err_req(err_msg):

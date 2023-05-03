@@ -1,7 +1,7 @@
 from colored import fg, bg, attr
 from menu_functions import main_menu, exit_app
 from pwd_functions import set_len, set_req, gen_pwd
-from file_functions import check_file, view_file, save_pwd
+from file_functions import check_file, view_file, save_pwd, del_pwd
 from err_functions import err_main
 
 print(f"{bg(0)}{fg(220)}Hello! Welcome to the Password Generator. {fg(221)}How can I help?{attr(0)}")
@@ -35,8 +35,21 @@ while user_action != "3":
             except Exception as e:
                 err_main(f"{type(e).__name__}: Something went wrong.")
         
-        # Exit
+        # Delete a password
         case 3:
+            try:
+                check_file(pwd_filename)
+                del_pwd(pwd_filename)
+            except FileNotFoundError:
+                print(f"{bg(0)}{fg(196)}You haven't saved any passwords yet.{attr(0)}")
+                continue
+            except KeyboardInterrupt:
+                exit_app()
+            except Exception as e:
+                err_main(f"{type(e).__name__}: Something went wrong.")
+
+        # Exit
+        case 4:
             exit_app()
 
         # User entered an invalid input

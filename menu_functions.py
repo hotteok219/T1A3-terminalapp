@@ -9,8 +9,9 @@ def main_menu():
             print(f"*************\n  Main menu\n*************")
             print(f"{fg(2)}{bg(0)}1.{attr(0)} I want to create a new password.")
             print(f"{fg(6)}{bg(0)}2.{attr(0)} I want to view my passwords.")
-            print(f"{fg(13)}{bg(0)}3.{attr(0)} I want to exit.")
-            inp = int(input(f"Please enter {fg(2)}{bg(0)}1{attr(0)}, {fg(6)}{bg(0)}2{attr(0)} or {fg(13)}{bg(0)}3{attr(0)}: "))
+            print(f"{fg(58)}{bg(0)}3.{attr(0)} I want to delete a password.")
+            print(f"{fg(13)}{bg(0)}4.{attr(0)} I want to exit.")
+            inp = int(input(f"Please enter {fg(2)}{bg(0)}1{attr(0)}, {fg(6)}{bg(0)}2{attr(0)}, {fg(58)}{bg(0)}3{attr(0)} or {fg(13)}{bg(0)}4{attr(0)}: "))
             return inp
         except ValueError as e:
             err_main(f"{type(e).__name__}: You've entered an invalid option.")
