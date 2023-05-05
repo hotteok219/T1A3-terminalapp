@@ -1,53 +1,59 @@
 import csv
 from colored import fg, bg, attr
 from menu_functions import exit_app
+from err_functions import err_empty
 
-# Check if password history exists
+
+# Check if password history exists.
 def check_file(pfile):
-    pwd_file = open(pfile, "r")
-    pwd_file.close()
+    pf = open(pfile, "r")
+    pf.close()
 
 
-# Create a file for password history
+# Create a file for password history.
 def create_file(pfile):
-    pwd_file = open(pfile, "w")
-    pwd_file.write("Password ID,Password\n")
-    pwd_file.close()
-    print(f"{bg(0)}{fg(220)}A file to store your password history has been created.{attr(0)}")
+    pf = open(pfile, "w")
+    pf.write("Password ID,Password\n")
+    pf.close()
+    print(f"{bg(0)}{fg(220)}A file to store your passwords has been created.{attr(0)}")
 
 
-# View password history
+# View password history.
 def view_file(pfile):
     print(f"{bg(0)}{fg(220)}Great! Please see your passwords below:{attr(0)}")
-    with open(pfile, "r") as pwd_file:
-        reader = csv.reader(pwd_file)
+    with open(pfile, "r") as pf:
+        reader = csv.reader(pf)
         for row in reader:
             print(f"{row[0]}, {row[1]}")
 
-# Ask user if they want to save the password
+
+# Ask user if they want to save the password.
 def save_pwd(user_pwd, pfile):
     while True:
         save_pwd = input(f"{bg(0)}{fg(221)}Do you want to save this password? Yes or No: {attr(0)}")
-        if save_pwd == "Yes" or save_pwd == "yes":
+        if save_pwd.lower() == "yes":
             try:
                 check_file(pfile)
-                pwd_id = lbl_pwd(user_pwd)
+                pwd_id = label_pwd(user_pwd)
                 add_pwd(pwd_id, user_pwd, pfile)
                 break
             except FileNotFoundError:
                 create_file(pfile)
-                pwd_id = lbl_pwd(user_pwd)
+                pwd_id = label_pwd(user_pwd)
                 add_pwd(pwd_id, user_pwd, pfile)
                 break
-        elif save_pwd == "No" or save_pwd == "no":
+        elif save_pwd.lower() == "no":
             print(f"{bg(0)}{fg(220)}I have not saved your password.{attr(0)}")
             break
+        elif save_pwd == "":
+            err_empty()
         else:
             print(f"{bg(0)}{fg(196)}Sorry, I didn't quite get that. {fg(221)}Please enter 'Yes' or 'No'.{attr(0)}")
             continue
 
-# Label password
-def lbl_pwd(user_pwd):
+
+# Label password.
+def label_pwd(user_pwd):
     while True:
         try:
             pwd_id = input(f"{bg(0)}{fg(221)}Enter a label for this password (e.g. email, banking): {attr(0)}")
@@ -63,39 +69,45 @@ def lbl_pwd(user_pwd):
             print(f"{bg(0)}{fg(196)}{type(e).__name__}: Something unexpected has occurred.{attr(0)}")
 
 
-# Add password to password history
+
+# Add password to password history.
 def add_pwd(pwd_id, user_pwd, pfile):
-    with open(pfile, "a") as pwd_file:
-        writer = csv.writer(pwd_file)
+    with open(pfile, "a") as pf:
+        writer = csv.writer(pf)
         writer.writerow([pwd_id, user_pwd])
         print(f"{bg(0)}{fg(220)}I have saved your password - {fg(39)}{user_pwd}{fg(220)} under {fg(39)}{pwd_id}{fg(220)}.{attr(0)}")
 
-# Remove password from password history
-def del_pwd(pfile):
-    del_pwdid = input(f"{bg(0)}{fg(221)}Enter the label of the password you want to delete: {attr(0)}")
-    del_pwdlist = []
 
-    pwd_exists = chk_pwd(del_pwdid, pfile)
-    
+# Remove password from password history.
+def del_pwd(pfile):
+    while True:
+        del_pwdid = input(f"{bg(0)}{fg(221)}Enter the label of the password you want to delete: {attr(0)}")
+        if del_pwdid == "":
+            err_empty()
+            continue
+        break
+    del_pwdlist = []
+    pwd_exists = check_pwd(del_pwdid, pfile)
     if pwd_exists:
-        with open(pfile, "r") as pwd_file:
-            reader = csv.reader(pwd_file)
+        with open(pfile, "r") as pf:
+            reader = csv.reader(pf)
             for row in reader:
                 if del_pwdid != row[0]:
                     del_pwdlist.append(row)
                 else:
                     print(f"{bg(0)}{fg(220)}Your password for {fg(39)}{del_pwdid}{attr(0)}{bg(0)}{fg(220)} will be deleted.{attr(0)}")
-        with open(pfile, "w") as pwd_file:
-            writer = csv.writer(pwd_file)
+        with open(pfile, "w") as pf:
+            writer = csv.writer(pf)
             writer.writerows(del_pwdlist)
     else:
         print(f"{bg(0)}{fg(196)}The password for {fg(39)}{del_pwdid}{attr(0)}{bg(0)}{fg(196)} doesn't exist.{attr(0)}")
         return
 
-# Check password exists in password history
-def chk_pwd(pwd, pfile):
-    with open(pfile, "r") as pwd_file:
-        reader = csv.reader(pwd_file)
+
+# Check password exists in password history.
+def check_pwd(pwd, pfile):
+    with open(pfile, "r") as pf:
+        reader = csv.reader(pf)
         for row in reader:
             if (pwd == row[0]):
                 pwd_exists = True

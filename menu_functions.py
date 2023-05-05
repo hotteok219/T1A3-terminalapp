@@ -30,7 +30,7 @@ def req_menu():
             print(f"{fg(6)}{bg(0)}2.{attr(0)} Enter 2 to include uppercase letters - e.g. A, B, C")
             print(f"{fg(13)}{bg(0)}3.{attr(0)} Enter 3 to include numbers - e.g. 1, 2, 3")
             print(f"{fg(129)}{bg(0)}4.{attr(0)} Enter 4 to include special characters - e.g !, @, #")
-            print(f"{fg(166)}{bg(0)}5.{attr(0)} Enter 5 to if there are no more requirements.")
+            print(f"{fg(166)}{bg(0)}5.{attr(0)} Enter 5 if there are no more requirements.")
             print(f"{fg(199)}{bg(0)}6.{attr(0)} Enter 6 to exit.")
             req = int(input(f"Please enter {fg(2)}{bg(0)}1{attr(0)}, {fg(6)}{bg(0)}2{attr(0)}, {fg(13)}{bg(0)}3{attr(0)}, {fg(129)}{bg(0)}4{attr(0)}, {fg(166)}{bg(0)}5{attr(0)} or {fg(199)}{bg(0)}6{attr(0)}: "))
             return req

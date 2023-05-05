@@ -5,7 +5,7 @@ from menu_functions import req_menu, exit_app
 from err_functions import err_req, err_plen
 
 
-# Password length
+# User determines password length.
 def set_len():
     plen = 0
     invalid_attempt = 0
@@ -27,13 +27,14 @@ def set_len():
     exit_app()
 
 
-# Define lists for lowercase letters, uppercase letters, numbers and special characters
+# Define lists for lowercase letters, uppercase letters, numbers and special characters.
 list_low = ascii_lowercase
 list_upp = ascii_uppercase
 list_num = digits
 list_sym = punctuation
 
-# Set requirements
+
+# User determines password requirements.
 def set_req():
     user_req = ""
     preq_list = []
@@ -67,7 +68,8 @@ def set_req():
             case _:
                 err_req(f"Something went wrong.")
 
-# Generate password
+
+# Generate password.
 def gen_pwd(pwd_req, pwd_len):
     user_pwd = "".join(sample(pwd_req, pwd_len))
     print(f"{bg(0)}{fg(220)}Your password is: {fg(39)}{user_pwd}{attr(0)}")
