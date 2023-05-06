@@ -1,7 +1,20 @@
 import csv
 import pytest
+from menu_functions import main_menu
 from pwd_functions import set_len
 from file_functions import add_pwd
+
+
+# Tests the main_menu() function, where user input is 1, expectation: returns 1.
+def test_main_menu_valid(monkeypatch):
+    monkeypatch.setattr('builtins.input', lambda: 1)
+    assert main_menu() == 1
+
+# Tests the main_menu() function, where user input is 8, expectation: ValueError.
+def test_main_menu_invalid(monkeypatch):
+    monkeypatch.setattr('builtins.input', lambda: 8)
+    with pytest.raises(ValueError):
+        main_menu()
 
 
 # Tests the set_len() function, where user input is 6, expectation: returns 6.
