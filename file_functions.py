@@ -30,26 +30,30 @@ def view_file(pfile):
 # Ask user if they want to save the password.
 def save_pwd(user_pwd, pfile):
     while True:
-        save_pwd = input(f"{bg(0)}{fg(221)}Do you want to save this password? Yes or No: {attr(0)}")
-        if save_pwd.lower() == "yes":
-            try:
-                check_file(pfile)
-                pwd_id = label_pwd(user_pwd)
-                add_pwd(pwd_id, user_pwd, pfile)
-                break
-            except FileNotFoundError:
-                create_file(pfile)
-                pwd_id = label_pwd(user_pwd)
-                add_pwd(pwd_id, user_pwd, pfile)
-                break
-        elif save_pwd.lower() == "no":
-            print(f"{bg(0)}{fg(220)}I have not saved your password.{attr(0)}")
-            break
-        elif save_pwd == "":
-            err_empty()
+        try:
+            save_pwd = input(f"{bg(0)}{fg(221)}Do you want to save this password? Yes or No: {attr(0)}")
+        except KeyboardInterrupt:
+            exit_app()
+        except Exception as e:
+            print(f"{bg(0)}{fg(196)}{type(e).__name__}: Something unexpected has occurred.{attr(0)}")
         else:
-            print(f"{bg(0)}{fg(196)}Sorry, I didn't quite get that. {fg(221)}Please enter 'Yes' or 'No'.{attr(0)}")
-            continue
+            if save_pwd.lower() == "yes":
+                try:
+                    check_file(pfile)
+                except FileNotFoundError:
+                    create_file(pfile)
+                finally:
+                    pwd_id = label_pwd(user_pwd)
+                    add_pwd(pwd_id, user_pwd, pfile)
+                    break
+            elif save_pwd.lower() == "no":
+                print(f"{bg(0)}{fg(220)}I have not saved your password.{attr(0)}")
+                break
+            elif save_pwd == "":
+                err_empty()
+            else:
+                print(f"{bg(0)}{fg(196)}Sorry, I didn't quite get that. {fg(221)}Please enter 'Yes' or 'No'.{attr(0)}")
+                continue
 
 
 # Label password.
@@ -62,7 +66,7 @@ def label_pwd(user_pwd):
             else:
                 return pwd_id
         except ValueError as e:
-            print(f"{bg(0)}{fg(196)}{type(e).__name__}: Please provide a label for this password.{attr(0)}")
+            print(f"Please provide a label for this password.{attr(0)}")
         except KeyboardInterrupt:
             exit_app()
         except Exception as e:
@@ -81,11 +85,16 @@ def add_pwd(pwd_id, user_pwd, pfile):
 # Remove password from password history.
 def del_pwd(pfile):
     while True:
-        del_pwdid = input(f"{bg(0)}{fg(221)}Enter the label of the password you want to delete: {attr(0)}")
-        if del_pwdid == "":
-            err_empty()
-            continue
-        break
+        try:
+            del_pwdid = input(f"{bg(0)}{fg(221)}Enter the label of the password you want to delete: {attr(0)}")
+            if del_pwdid == "":
+                err_empty()
+                continue
+            break
+        except KeyboardInterrupt:
+            exit_app()
+        except Exception as e:
+            print(f"{bg(0)}{fg(196)}{type(e).__name__}: Something unexpected has occurred.{attr(0)}")
     del_pwdlist = []
     pwd_exists = check_pwd(del_pwdid, pfile)
     if pwd_exists:

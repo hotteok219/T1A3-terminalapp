@@ -21,3 +21,8 @@ def err_plen(err_msg, inv_num):
 # Error for empty inputs
 def err_empty():
     print(f"{bg(0)}{fg(196)}Input cannot be empty.{attr(0)}")
+
+
+# Error for no password file
+def err_nopwd():
+    print(f"{bg(0)}{fg(196)}You haven't saved any passwords yet.{attr(0)}")

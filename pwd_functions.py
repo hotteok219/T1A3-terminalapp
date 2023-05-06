@@ -13,12 +13,12 @@ def set_len():
         try:
             plen = int(input(f"{bg(0)}{fg(221)}How long should the password be?{attr(0)} "))
             if plen <= 5:
-                err_plen("Your password length is too short.", invalid_attempt)
+                raise ValueError
             else:
                 print(f"{bg(0)}{fg(221)}Okay, we'll create a password that is {plen} characters long.{attr(0)}")
                 return plen
         except ValueError as e:
-            err_plen(f"{type(e).__name__}: Please enter a numerical value.", invalid_attempt)
+            err_plen(f"{type(e).__name__}: You've entered an invalid option.", invalid_attempt)
         except KeyboardInterrupt:
             exit_app()
         except Exception as e:
@@ -66,7 +66,7 @@ def set_req():
             case 6:
                 exit_app()
             case _:
-                err_req(f"Something went wrong.")
+                err_req("Something went wrong.")
 
 
 # Generate password.
