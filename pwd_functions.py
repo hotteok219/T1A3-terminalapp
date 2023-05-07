@@ -39,34 +39,42 @@ def set_req():
     user_req = ""
     preq_list = []
     while user_req != "6":
-        user_req = req_menu()
-        match user_req:
-            case 1:
-                preq_list += list_low
-                print(f"{bg(0)}{fg(220)}You've added lowercase letters to the list of requirements.{attr(0)}")
-            case 2:
-                preq_list += list_upp
-                print(f"{bg(0)}{fg(220)}You've added uppercase letters to the list of requirements.{attr(0)}")
-            case 3:
-                preq_list += list_num
-                print(f"{bg(0)}{fg(220)}You've added numbers to the list of requirements.{attr(0)}")
-            case 4:
-                preq_list +=  list_sym
-                print(f"{bg(0)}{fg(220)}You've added special characters to the list of requirements.{attr(0)}")
-            case 5:
-                # No requirements selected
-                if preq_list == []:
-                    print(f"{bg(0)}{fg(196)}You haven't entered any requirements. Please enter at least one requirement.{attr(0)}")
-                    continue
-                else:
-                    # Remove any duplicates
-                    preq_list = list(dict.fromkeys(preq_list))
-                    print(f"{bg(0)}{fg(220)}Thanks for providing the requirements. Your password is being generated.{attr(0)}")
-                    return preq_list
-            case 6:
-                exit_app()
-            case _:
-                err_req("Something went wrong.")
+        try:
+            user_req = req_menu()
+        except ValueError as e:
+            err_req(f"{type(e).__name__}: You've entered an invalid option.")
+        except KeyboardInterrupt:
+            exit_app()
+        except Exception as e:
+            err_req(f"{type(e).__name__}: Something went wrong.")
+        else:
+            match user_req:
+                case 1:
+                    preq_list += list_low
+                    print(f"{bg(0)}{fg(220)}You've added lowercase letters to the list of requirements.{attr(0)}")
+                case 2:
+                    preq_list += list_upp
+                    print(f"{bg(0)}{fg(220)}You've added uppercase letters to the list of requirements.{attr(0)}")
+                case 3:
+                    preq_list += list_num
+                    print(f"{bg(0)}{fg(220)}You've added numbers to the list of requirements.{attr(0)}")
+                case 4:
+                    preq_list +=  list_sym
+                    print(f"{bg(0)}{fg(220)}You've added special characters to the list of requirements.{attr(0)}")
+                case 5:
+                    # No requirements selected
+                    if preq_list == []:
+                        print(f"{bg(0)}{fg(196)}You haven't entered any requirements. Please enter at least one requirement.{attr(0)}")
+                        continue
+                    else:
+                        # Remove any duplicates
+                        preq_list = list(dict.fromkeys(preq_list))
+                        print(f"{bg(0)}{fg(220)}Thanks for providing the requirements. Your password is being generated.{attr(0)}")
+                        return preq_list
+                case 6:
+                    exit_app()
+                case _:
+                    err_req("Something went wrong.")
 
 
 # Generate password.

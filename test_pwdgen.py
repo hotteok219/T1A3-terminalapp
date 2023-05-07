@@ -1,18 +1,18 @@
 import csv
 import pytest
-from menu_functions import main_menu
+from menu_functions import main_menu, req_menu
 from pwd_functions import set_len
 from file_functions import add_pwd
 
 
 # Tests the main_menu() function, where user input is 1, expectation: returns 1.
 def test_main_menu_valid(monkeypatch):
-    monkeypatch.setattr('builtins.input', lambda: 1)
+    monkeypatch.setattr('builtins.input', lambda _: 1)
     assert main_menu() == 1
 
 # Tests the main_menu() function, where user input is 8, expectation: ValueError.
 def test_main_menu_invalid(monkeypatch):
-    monkeypatch.setattr('builtins.input', lambda: 8)
+    monkeypatch.setattr('builtins.input', lambda _: 8)
     with pytest.raises(ValueError):
         main_menu()
 
@@ -31,6 +31,16 @@ def test_set_len_invalid(monkeypatch):
         with pytest.raises(ValueError):
             set_len()
 
+# Tests the req_menu() function, where user input is 1, expectation: returns 1.
+def test_main_menu_valid(monkeypatch):
+    monkeypatch.setattr('builtins.input', lambda _: 3)
+    assert req_menu() == 3
+
+# Tests the req_menu() function, where user input is 8, expectation: ValueError.
+def test_main_menu_invalid(monkeypatch):
+    monkeypatch.setattr('builtins.input', lambda _: 7)
+    with pytest.raises(ValueError):
+        req_menu()
 
 # Tests add_pwd() function, where user input "Password1" is added to the test
 # password file, expectation: "Password1" appended to test_pwd_history.csv
