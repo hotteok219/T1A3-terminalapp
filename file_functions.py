@@ -66,7 +66,7 @@ def label_pwd(user_pwd):
             else:
                 return pwd_id
         except ValueError as e:
-            print(f"Please provide a label for this password.{attr(0)}")
+            print(f"{bg(0)}{fg(220)}Please provide a label for this password.{attr(0)}")
         except KeyboardInterrupt:
             exit_app()
         except Exception as e:
