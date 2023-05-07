@@ -31,13 +31,13 @@ def test_set_len_invalid(monkeypatch):
         with pytest.raises(ValueError):
             set_len()
 
-# Tests the req_menu() function, where user input is 1, expectation: returns 1.
-def test_main_menu_valid(monkeypatch):
+# Tests the req_menu() function, where user input is 3, expectation: returns 3.
+def test_req_menu_valid(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: 3)
     assert req_menu() == 3
 
-# Tests the req_menu() function, where user input is 8, expectation: ValueError.
-def test_main_menu_invalid(monkeypatch):
+# Tests the req_menu() function, where user input is 7, expectation: ValueError.
+def test_req_menu_invalid(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: 7)
     with pytest.raises(ValueError):
         req_menu()
