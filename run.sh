@@ -1,11 +1,8 @@
 #!/bin/bash
 
 # Check if python is installed.
-if [[ -x "$(command -v python)" ]]
+if [[ -x "$(command -v python3)" ]]
 then
-    echo "The Password Generator needs Python in order to run. Please go to https://www.python.org/downloads/ to download and install Python." >&2
-    exit 1
-else
     # Check if venv already exists.
     if [[ -d "pwdgen-venv" ]]
     then
@@ -25,4 +22,7 @@ else
     clear
     # Run application.
     python3 main.py
+else
+    echo "The Password Generator needs Python in order to run. Please go to https://www.python.org/downloads/ to download and install Python." >&2
+    exit 1
 fi
